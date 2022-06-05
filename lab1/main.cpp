@@ -4,62 +4,22 @@
 // 11 Вариант
 //
 
-#include <string.h>
-#include <iostream>
+#include "Person.h"
 
-class Person {
-public:
-    Person(const char* new_name, int ag, bool gen) {
-        strcpy(name, new_name);
-        age = ag;
-        gender = gen;
-    }
-    Person() {
-        name[0] = '\0';
-        age = 0;
-        gender = 0;
-    }
-    Person(const Person& per) {
-        strcpy(name, per.name);
-        age = per.age;
-        gender = per.gender;
-    }
-    int set_name(const char* new_name) {
-        strcpy(name, new_name);
-        return 0;
-    }
-    int set_age(int years) {
-        age = years;
-        return 0;
-    }
-    int set_gender(bool gen) {
-        gender = gen;
-        return 0;
-    }
-    const char* get_name() {
-        return name;
-    }
-    int get_age() {
-        return age;
-    }
-    bool get_gender() {
-        return gender;
-    }
-private:
-    char name[30];
-    int age;
-    bool gender;
-
-};
-
-int main () {
+int main() {
+    setlocale(LC_ALL, "Russian");
     std::string st = "test";
+    {
+        Person test("test", 55, 1);
+    }
     Person one("Elena", 10, 0);
     Person two(one);
     one.set_name("Alex");
     one.set_age(20);
     one.set_gender(1);
+    Person* person_pointer = &two;
     std::cout << one.get_name() << " " << one.get_age() << " " << one.get_gender() << std::endl;
-    std::cout << two.get_name() << " " << two.get_age() << " " << two.get_gender() << std::endl;
+    std::cout << person_pointer->get_name() << " " << person_pointer->get_age() << " " << person_pointer->get_gender() << std::endl;
+
     return 0;
 }
